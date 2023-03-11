@@ -1,5 +1,9 @@
 # Getting Started with Create React App
 
+
+/* if you have issues with datepicker do npm i react-datepicker@4.8.0*/
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
