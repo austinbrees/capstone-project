@@ -15,6 +15,8 @@ import customersRoutes from './routes/customers.js';
 // Data imports //
 import user from './models/user.js';
 import dataUser from './data/index.js';
+import articles from './models/articles.js';
+import ArticlesStatSchema from './models/articles.js';
 
 
 /* Configuratoin */
