@@ -1,7 +1,12 @@
-import express, { Router } from 'express';
+import express from 'express';
+
+import { getCustomers,
+         getGeography } from '../controllers/general.js';
 
 const router = express.Router();
 
 
+router.get("/customers", getCustomers);
+router.get("/geography", getGeography);
 
-export default Router;
+export default router;

@@ -2,6 +2,8 @@ import mongoose from "mongoose";
 
 
 
+
+
 const ArticlesStatSchema = new mongoose.Schema({
   _id: mongoose.Schema.Types.ObjectId,
   t_dat: {
@@ -25,6 +27,7 @@ const ArticlesStatSchema = new mongoose.Schema({
     required: true,
   },
 });
+
 
 
 const articlesStat = mongoose.model("transactions", ArticlesStatSchema);

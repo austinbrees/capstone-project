@@ -9,6 +9,7 @@ import articlesRoutes from './routes/articles.js';
 import managementRoutes from './routes/management.js';
 import generalRoutes from './routes/general.js';
 import transactionsRoutes from './routes/transactions.js';
+import morgan from 'morgan';
 import customersRoutes from './routes/customers.js';
 
 
@@ -17,6 +18,7 @@ import user from './models/user.js';
 import dataUser from './data/index.js';
 import articles from './models/articles.js';
 import ArticlesStatSchema from './models/articles.js';
+import { getGeography } from './controllers/general.js';
 
 
 /* Configuratoin */
@@ -36,6 +38,7 @@ app.use("/general", generalRoutes);
 app.use("/management", managementRoutes);
 app.use("/transactions", transactionsRoutes);
 app.use("/customers", customersRoutes);
+
 
 
 /* Mongoose Setup */
