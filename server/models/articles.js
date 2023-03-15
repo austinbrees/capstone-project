@@ -105,7 +105,23 @@ const Articleschema = new mongoose.Schema({
     }
   });
   
+  Articleschema.statics.findPaginated = async function (page, limit) {
+    const skip = (page - 1) * limit;
+    const data = await this.find().skip(skip).limit(limit).exec();
+    const count = await this.countDocuments().exec();
+    const totalPages = Math.ceil(count / limit);
+  
+    return {
+      data,
+      metadata: {
+        page,
+        limit,
+        totalPages,
+        count,
+      },
+    };
+  };
+  
   const articles = mongoose.model("articles", Articleschema);
   
   export default articles;
-  

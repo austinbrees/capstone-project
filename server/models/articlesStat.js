@@ -4,7 +4,7 @@ import mongoose from "mongoose";
 
 
 
-const ArticlesStatSchema = new mongoose.Schema({
+const TransactionsSchema = new mongoose.Schema({
   _id: mongoose.Schema.Types.ObjectId,
   t_dat: {
     type: Date,
@@ -29,7 +29,6 @@ const ArticlesStatSchema = new mongoose.Schema({
 });
 
 
+const transactions = mongoose.model("transactions", TransactionsSchema);
 
-const articlesStat = mongoose.model("transactions", ArticlesStatSchema);
-
-export default articlesStat;
+export default transactions;

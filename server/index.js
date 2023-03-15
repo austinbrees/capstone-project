@@ -9,7 +9,6 @@ import articlesRoutes from './routes/articles.js';
 import managementRoutes from './routes/management.js';
 import generalRoutes from './routes/general.js';
 import transactionsRoutes from './routes/transactions.js';
-import morgan from 'morgan';
 import customersRoutes from './routes/customers.js';
 
 
