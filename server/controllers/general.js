@@ -1,6 +1,11 @@
 import user from '../models/user.js';
 import customers from "../models/customers.js";
 import getCountryIso3 from "country-iso-2-to-3"
+import redis from 'redis';
+
+
+const redisClient = redis.createClient({ host: 'localhost', port: 6379 });
+
 
 export const getUser = async (req, res) => {
     try {
