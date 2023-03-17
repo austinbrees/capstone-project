@@ -2,8 +2,6 @@ import mongoose from "mongoose";
 
 
 
-
-
 const TransactionsSchema = new mongoose.Schema({
   _id: mongoose.Schema.Types.ObjectId,
   t_dat: {

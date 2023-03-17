@@ -1,5 +1,4 @@
 import articles from '../models/articles.js'
-import articlesStat from '../models/articlesStat.js'
 
 export const getArticles = async (req, res) => {
   const page = parseInt(req.query.page) || 1;

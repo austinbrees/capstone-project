@@ -8,7 +8,7 @@ import morgan from 'morgan';
 import articlesRoutes from './routes/articles.js';
 import managementRoutes from './routes/management.js';
 import generalRoutes from './routes/general.js';
-import transactionsRoutes from './routes/transactions.js';
+import transactionsRoutes from './routes/customers.js';
 import customersRoutes from './routes/customers.js';
 
 
@@ -18,6 +18,7 @@ import dataUser from './data/index.js';
 import articles from './models/articles.js';
 import ArticlesStatSchema from './models/articles.js';
 import { getGeography } from './controllers/general.js';
+import transactions from './models/transactions.js';
 
 
 /* Configuratoin */

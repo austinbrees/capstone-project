@@ -1,10 +1,10 @@
 
 
-import express from 'express';
-const router = express.Router();
-import { getTransactions } from '../controllers/transactions.js';
+// import express from 'express';
+// const router = express.Router();
+// import { getTransactions } from '../controllers/transactions.js';
 
-router.get("/transactions", getTransactions);
+// router.get("/transactions", getTransactions);
 
-export default router;
+// export default router;
 
