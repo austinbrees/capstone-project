@@ -10,6 +10,7 @@ import managementRoutes from './routes/management.js';
 import generalRoutes from './routes/general.js';
 import transactionsRoutes from './routes/customers.js';
 import customersRoutes from './routes/customers.js';
+import yearlyOverviewRoutes from './routes/yearlyOverview.js';
 
 
 // Data imports //
@@ -38,6 +39,7 @@ app.use("/general", generalRoutes);
 app.use("/management", managementRoutes);
 app.use("/transactions", transactionsRoutes);
 app.use("/customers", customersRoutes);
+app.use("/yearlyOverview", yearlyOverviewRoutes);
 
 
 

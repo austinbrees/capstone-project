@@ -93,9 +93,27 @@ export const getGeography = async (req, res) => {
             .skip((page - 1) * pageSize)
             .limit(parseInt(pageSize, 10));
       
-          const total = await TransactionsModel.countDocuments({
-            name: { $regex: new RegExp(search, "i") },
-          });
+            const total = await TransactionsModel.countDocuments({
+              $or: [
+                {
+                  $expr: {
+                    $regexMatch: {
+                      input: { $toString: "$price" },
+                      regex: new RegExp(search, "i"),
+                    },
+                  },
+                },
+                {
+                  $expr: {
+                    $regexMatch: {
+                      input: { $toString: "$article_id" },
+                      regex: new RegExp(search, "i"),
+                    },
+                  },
+                },
+              ],
+            });
+            
       
           res.status(200).json({ transactions: foundTransactions, total });
         } catch (error) {
@@ -103,4 +121,27 @@ export const getGeography = async (req, res) => {
         }
       };
       
+      export const getYearlyOverview = async (req, res) => {
+        try {
+          const pipeline = [
+            {
+            $addFields: {
+            t_dat: { $toDate: "$t_dat" },
+            },
+            },
+            {
+            $addFields: {
+            year: { $year: "$t_dat" },
+            month: { $month: "$t_dat" },
+            },
+            },
+            { $limit: 2000 }, // Add thi
+            ];
       
+          const yearlyOverview = await TransactionsModel.aggregate(pipeline);
+          res.status(200).json(yearlyOverview);
+        } catch (error) {
+          res.status(404).json({ message: error.message });
+        }
+      };
+
