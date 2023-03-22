@@ -135,7 +135,7 @@ export const getGeography = async (req, res) => {
             month: { $month: "$t_dat" },
             },
             },
-            { $limit: 2000 }, // Add thi
+            { $limit: 20000 }, // Add thi
             ];
       
           const yearlyOverview = await TransactionsModel.aggregate(pipeline);
