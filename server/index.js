@@ -5,23 +5,22 @@ import cors from "cors";
 import dotenv from "dotenv";
 import helmet from "helmet";
 import morgan from "morgan";
-import cookieParser from "cookie-parser";
-
 import articlesRoutes from "./routes/articles.js";
 import managementRoutes from "./routes/management.js";
 import generalRoutes from "./routes/general.js";
-import transactionsRoutes from "./routes/transactions.js";
 import customersRoutes from "./routes/customers.js";
 import yearlyOverviewRoutes from "./routes/yearlyOverview.js";
-import authRoutes from "./routes/authRoutes.js"; // Add this import
+//import router from "./routes/authRoutes.js";
+import cookieParser from "cookie-parser";
+//import authRoutes from "./routes/authRoutes.js";
 
-// Data imports //
-import user from "./models/user.js";
-import dataUser from "./data/index.js";
-import articles from "./models/articles.js";
-import ArticlesStatSchema from "./models/articles.js";
-import { getGeography } from "./controllers/general.js";
-import transactions from "./models/transactions.js";
+// // Data imports //
+// import user from "./models/user.js";
+// import dataUser from "./data/index.js";
+// import articles from "./models/articles.js";
+// import ArticlesStatSchema from "./models/articles.js";
+// import { getGeography } from "./controllers/general.js";
+// import transactions from "./models/transactions.js";
 
 /* Configuration */
 dotenv.config();
@@ -44,11 +43,11 @@ app.use(
 );
 
 /* Routes */
-app.use("/", authRoutes); // Add this route
+app.use("/", generalRoutes); // Add this route
 app.use("/articles", articlesRoutes);
 app.use("/general", generalRoutes);
 app.use("/management", managementRoutes);
-app.use("/transactions", transactionsRoutes);
+app.use("/transactions", customersRoutes);
 app.use("/customers", customersRoutes);
 app.use("/yearlyOverview", yearlyOverviewRoutes);
 
