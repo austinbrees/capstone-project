@@ -198,7 +198,14 @@ export const getYearlyOverview = async (req, res) => {
           month: { $month: "$t_dat" },
         },
       },
-      { $limit: 20000 }, // Add thi
+      {
+        $group: {
+          _id: "$sales_channel_id",
+          sales_total: { $sum: "$price" },
+          units: { $sum: 1 },
+        },
+      },
+      { $limit: 20000 },
     ];
 
     const yearlyOverview = await TransactionsModel.aggregate(pipeline);
@@ -207,3 +214,4 @@ export const getYearlyOverview = async (req, res) => {
     res.status(404).json({ message: error.message });
   }
 };
+
