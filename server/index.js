@@ -12,6 +12,7 @@ import customersRoutes from "./routes/customers.js";
 import yearlyOverviewRoutes from "./routes/yearlyOverview.js";
 //import router from "./routes/authRoutes.js";
 import cookieParser from "cookie-parser";
+import dailyOverviewRoutes from "./routes/customers.js";
 //import authRoutes from "./routes/authRoutes.js";
 
 // // Data imports //
@@ -50,6 +51,7 @@ app.use("/management", managementRoutes);
 app.use("/transactions", customersRoutes);
 app.use("/customers", customersRoutes);
 app.use("/yearlyOverview", yearlyOverviewRoutes);
+app.use("/dailyOverview", customersRoutes);
 
 /* Mongoose Setup */
 const Port = process.env.PORT || 9000;

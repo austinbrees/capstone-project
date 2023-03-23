@@ -200,12 +200,15 @@ export const getYearlyOverview = async (req, res) => {
       },
       {
         $group: {
-          _id: "$sales_channel_id",
+          _id: {
+            year: "$year",
+            sales_channel_id: "$sales_channel_id",
+          },
           sales_total: { $sum: "$price" },
           units: { $sum: 1 },
         },
       },
-      { $limit: 20000 },
+      { $sort: { "_id.year": 1, "_id.sales_channel_id": 1 } },
     ];
 
     const yearlyOverview = await TransactionsModel.aggregate(pipeline);
@@ -215,3 +218,46 @@ export const getYearlyOverview = async (req, res) => {
   }
 };
 
+export const getdailyOverview = async (req, res) => {
+  try {
+    const pipeline = [
+      {
+        $addFields: {
+          t_dat: { $toDate: "$t_dat" },
+        },
+      },
+      {
+        $addFields: {
+          dayOfMonth: { $dayOfMonth: "$t_dat" },
+          month: { $month: "$t_dat" },
+          year: { $year: "$t_dat" },
+        },
+      },
+      {
+        $group: {
+          _id: {
+            dayOfMonth: "$dayOfMonth",
+            month: "$month",
+            year: "$year",
+            sales_channel_id: "$sales_channel_id",
+          },
+          sales_total: { $sum: "$price" },
+          units: { $sum: 1 },
+        },
+      },
+      {
+        $sort: {
+          "_id.year": 1,
+          "_id.month": 1,
+          "_id.dayOfMonth": 1,
+          "_id.sales_channel_id": 1,
+        },
+      },
+    ];
+
+    const dailyOverview = await TransactionsModel.aggregate(pipeline);
+    res.status(200).json(dailyOverview);
+  } catch (error) {
+    res.status(404).json({ message: error.message });
+  }
+};
