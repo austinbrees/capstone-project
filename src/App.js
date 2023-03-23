@@ -15,7 +15,7 @@ import Overview from "scenes/overview/index.jsx";
 import Register from "scenes/register/Register";
 import Login from "scenes/login/Login";
 import Secret from "scenes/secret/Secret";
-
+import DailyOverview from "scenes/dailyOverview";
 
 
 function App() {
@@ -24,24 +24,25 @@ function App() {
 
   return (
     <div className="app">
-        <BrowserRouter>   
-          <ThemeProvider theme={theme}>
-            <CssBaseline />
-            <Routes> 
-              <Route path="/register" element={<Register />} />
-              <Route path="/login" element={<Login />} />
-              <Route element={<Layout />}>
-                <Route path="/" element={<Navigate to='/dashboard' replace />} />
-                <Route path="/dashboard" element={<Dashboard />} />
-                <Route path="/articles" element={<Articles />} />
-                <Route path="/customers" element={<Customers />} />
-                <Route path="/geography" element={<Geography />} />
-                <Route path="/transactions" element={<Transactions />} />
-                <Route path="/yearlyoverview" element={<Overview />} />
-              </Route>
-            </Routes>
-          </ThemeProvider>
-        </BrowserRouter>
+      <BrowserRouter>
+        <ThemeProvider theme={theme}>
+          <CssBaseline />
+          <Routes>
+            <Route path="/register" element={<Register />} />
+            <Route path="/login" element={<Login />} />
+            <Route element={<Layout />}>
+              <Route path="/" element={<Navigate to="/dashboard" replace />} />
+              <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/articles" element={<Articles />} />
+              <Route path="/customers" element={<Customers />} />
+              <Route path="/geography" element={<Geography />} />
+              <Route path="/dailyoverview" element={<DailyOverview />} />
+              <Route path="/transactions" element={<Transactions />} />
+              <Route path="/yearlyoverview" element={<Overview />} />
+            </Route>
+          </Routes>
+        </ThemeProvider>
+      </BrowserRouter>
     </div>
   );
 }

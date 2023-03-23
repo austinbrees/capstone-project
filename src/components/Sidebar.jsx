@@ -31,7 +31,7 @@ import {
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import FlexBetween from "./FlexBetween";
-import profileImage from "assets/gustavo.jpeg";
+import profileImage from "assets/yellow-duck.webp";
 import logo from 'assets/hm-logo-1.png';
 
 
@@ -54,7 +54,7 @@ const navItems = [
     icon: <ReceiptLongOutlined />,
   },
   {
-    text: "Daily",
+    text: "DailyOverview",
     icon: <TodayOutlined />,
   },
   {

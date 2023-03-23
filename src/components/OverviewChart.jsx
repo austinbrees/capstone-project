@@ -1,7 +1,6 @@
 import React from "react";
-import { useGetYearlyOverviewQuery } from "state/api";
-import { Box } from "@mui/material";
 import BarChart from "./BarChart";
+import { useGetYearlyOverviewQuery } from "state/api";
 
 const OverviewChart = ({ view }) => {
   const { data, isLoading } = useGetYearlyOverviewQuery();
@@ -9,35 +8,57 @@ const OverviewChart = ({ view }) => {
   const processedData = React.useMemo(() => {
     if (!data) return [];
 
-    const salesByChannel = data.map((item) => {
-      const salesChannelId = item._id;
-      const channelIdKey = `sales_channel_${salesChannelId}`;
+    return data.map((item) => ({
+      sales_channel_id: item._id,
+      sales_total: item.sales_total,
+      units: item.units,
+    }));
+  }, [data]);
 
-      return {
-        country: `Sales Channel ${salesChannelId}`,
-        sales_channel_1: salesChannelId === 1 ? item[view] : 0,
-        sales_channel_2: salesChannelId === 2 ? item[view] : 0,
-      };
-    });
-
-    return salesByChannel;
-  }, [data, view]);
+  console.log("Data:", processedData); // Add this console.log statement
 
   if (isLoading) return <div>Loading...</div>;
 
+  const options = {
+    scales: {
+      yAxes: [
+        {
+          ticks: {
+            beginAtZero: true,
+            callback: function (value, index, values) {
+              return `$${value / 1000000}M`;
+            },
+          },
+          scaleLabel: {
+            display: true,
+            labelString: "Sales",
+          },
+        },
+      ],
+      xAxes: [
+        {
+          scaleLabel: {
+            display: true,
+            labelString: view === "unit" ? "Units" : "Sales",
+          },
+        },
+      ],
+    },
+  };
+
   return (
-    <Box
-      display="flex"
-      justifyContent="center"
-      alignItems="center"
-      height="100%"
-      width="100%"
+    <div
+      style={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        height: "100%",
+        width: "100%",
+      }}
     >
-      <BarChart data={processedData} view={view} />
-    </Box>
+      <BarChart data={processedData} view={view} options={options} />
+    </div>
   );
 };
-
-
 
 export default OverviewChart;

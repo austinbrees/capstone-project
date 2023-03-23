@@ -4,7 +4,12 @@ export const api = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: process.env.REACT_APP_BASE_URL }),
   reducerPath: "adminApi",
   tagTypes: [
-    "User", "Articles", "Customers", "Geography", "Transactions", "YearlyOverview"
+    "User",
+    "Articles",
+    "Customers",
+    "Geography",
+    "Transactions",
+    "YearlyOverview",
   ],
   endpoints: (builder) => ({
     // getUser: builder.query({
@@ -17,7 +22,8 @@ export const api = createApi({
         params: {
           page,
           limit,
-          fields: "_id,perceived_colour_master_name,department_name,section_name",
+          fields:
+            "_id,perceived_colour_master_name,department_name,section_name",
         },
       }),
       providesTags: ["Articles"],
@@ -28,8 +34,8 @@ export const api = createApi({
       providesTags: ["Customers"],
     }),
     getGeography: builder.query({
-      query: () => 'customers/geography',
-      providesTags: ['Geography'],
+      query: () => "customers/geography",
+      providesTags: ["Geography"],
     }),
     getTransactions: builder.query({
       query: ({ page, limit, sort, search }) => ({
@@ -44,10 +50,14 @@ export const api = createApi({
       providesTags: ["Transactions"],
     }),
     getYearlyOverview: builder.query({
-      query: () => 'yearlyOverview/yearlyOverview',
-      providesTags: ['YearlyOverview'],
-    }),    
-  })
+      query: () => "yearlyOverview/yearlyOverview",
+      providesTags: ["YearlyOverview"],
+    }),
+    getDailyOverview: builder.query({
+      query: () => "dailyOverview/dailyOverview",
+      providesTags: ["DailyOverview"],
+    }),
+  }),
 });
 
 
@@ -70,4 +80,5 @@ export const {
   useGetGeographyQuery,
   useGetTransactionsQuery,
   useGetYearlyOverviewQuery,
+  useGetDailyOverviewQuery
 } = api;
