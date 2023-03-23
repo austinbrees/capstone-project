@@ -4,68 +4,70 @@ export const api = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: process.env.REACT_APP_BASE_URL }),
   reducerPath: "adminApi",
   tagTypes: [
-    "User",
-    "Products",
-    "Customers",
-    "Transactions",
-    "Geography",
-    "Sales",
-    "Admins",
-    "Performance",
-    "Dashboard",
+    "User", "Articles", "Customers", "Geography", "Transactions", "YearlyOverview"
   ],
-  endpoints: (build) => ({
-    getUser: build.query({
-      query: (id) => `general/user/${id}`,
-      providesTags: ["User"],
+  endpoints: (builder) => ({
+    // getUser: builder.query({
+    //   query: (id) => `general/user/${id}`,
+    //   providesTags: ["User"],
+    // }),
+    getArticles: builder.query({
+      query: (page, limit) => ({
+        url: `articles/articles`,
+        params: {
+          page,
+          limit,
+          fields: "_id,perceived_colour_master_name,department_name,section_name",
+        },
+      }),
+      providesTags: ["Articles"],
+      transformResponse: (response) => response.data, // Add this line
     }),
-    getProducts: build.query({
-      query: () => "client/products",
-      providesTags: ["Products"],
-    }),
-    getCustomers: build.query({
-      query: () => "client/customers",
+    getCustomers: builder.query({
+      query: () => `customers/customers`,
       providesTags: ["Customers"],
     }),
-    getTransactions: build.query({
-      query: ({ page, pageSize, sort, search }) => ({
-        url: "client/transactions",
-        method: "GET",
-        params: { page, pageSize, sort, search },
+    getGeography: builder.query({
+      query: () => 'customers/geography',
+      providesTags: ['Geography'],
+    }),
+    getTransactions: builder.query({
+      query: ({ page, limit, sort, search }) => ({
+        url: `transactions/transactions`,
+        params: {
+          page,
+          limit,
+          sort,
+          search,
+        },
       }),
       providesTags: ["Transactions"],
     }),
-    getGeography: build.query({
-      query: () => "client/geography",
-      providesTags: ["Geography"],
-    }),
-    getSales: build.query({
-      query: () => "sales/sales",
-      providesTags: ["Sales"],
-    }),
-    getAdmins: build.query({
-      query: () => "management/admins",
-      providesTags: ["Admins"],
-    }),
-    getUserPerformance: build.query({
-      query: (id) => `management/performance/${id}`,
-      providesTags: ["Performance"],
-    }),
-    getDashboard: build.query({
-      query: () => "general/dashboard",
-      providesTags: ["Dashboard"],
-    }),
-  }),
+    getYearlyOverview: builder.query({
+      query: () => 'yearlyOverview/yearlyOverview',
+      providesTags: ['YearlyOverview'],
+    }),    
+  })
 });
+
+
+
+export const globalReducer = (state = { userId: null }, action) => {
+  switch (action.type) {
+    case 'SET_USER_ID':
+      return { ...state, userId: action.payload };
+    default:
+      return state;
+  }
+};
+
+
 
 export const {
   useGetUserQuery,
-  useGetProductsQuery,
+  useGetArticlesQuery,
   useGetCustomersQuery,
-  useGetTransactionsQuery,
   useGetGeographyQuery,
-  useGetSalesQuery,
-  useGetAdminsQuery,
-  useGetUserPerformanceQuery,
-  useGetDashboardQuery,
+  useGetTransactionsQuery,
+  useGetYearlyOverviewQuery,
 } = api;

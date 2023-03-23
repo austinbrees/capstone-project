@@ -35,6 +35,7 @@ import profileImage from "assets/gustavo.jpeg";
 import logo from 'assets/hm-logo-1.png';
 
 
+
 const navItems = [
   {
     text: "Dashboard",
@@ -60,16 +61,20 @@ const navItems = [
     text: "Monthly",
     icon: <CalendarMonthOutlined />,
   },
+    {
+      text: "YearlyOverview",
+      icon: <TrendingUpOutlined />,
+    },
   {
     text: "Breakdown",
     icon: <PieChartOutlined />,
   },
   {
-    text: "Customers",
+    text: "Customer Loyalty Program",
     icon: null,
   },
   {
-    text: "Customer List",
+    text: "Customers",
     icon: <PointOfSaleOutlined />,
   },
   {
@@ -93,6 +98,7 @@ const Sidebar = ({
   setIsSidebarOpen,
   isNonMobile,
 }) => {
+  //console.log("user:", user); // add this console.log statement
   const { pathname } = useLocation();
   const [active, setActive] = useState("");
   const navigate = useNavigate();
@@ -116,13 +122,13 @@ const Sidebar = ({
               color: theme.palette.secondary[200],
               backgroundColor: theme.palette.background.alt,
               boxSixing: "border-box",
-              borderWidth: isNonMobile ? 0 : "2px",
+              borderWidth: isNonMobile ? 0 : "1px",
               width: drawerWidth,
             },
           }}
         >
         <Box width="100%">
-            <Box m=".5rem 2rem .2rem 3rem">
+            <Box m=".5rem 2rem .1rem 3rem">
               <FlexBetween color={theme.palette.secondary.main}>
                 <Box display="flex" alignItems="center" gap="0.5rem">
                     <img src={logo} alt="Logo" height="75px" width="90px" />
@@ -138,7 +144,7 @@ const Sidebar = ({
               {navItems.map(({ text, icon }) => {
                 if (!icon) {
                   return (
-                    <Typography key={text} sx={{ m: "2.25rem 0 1rem 3rem" }}>
+                    <Typography key={text} sx={{ m: "1.5rem 0 .3rem 3rem" }}>
                       {text}
                     </Typography>
                   );
@@ -187,7 +193,7 @@ const Sidebar = ({
 
           <Box position="absolute" bottom="2rem">
             <Divider />
-            <FlexBetween textTransform="none" gap="1rem" m=".5rem 2rem 0 3rem">
+            <FlexBetween textTransform="none" gap="1rem" m="1.5rem 2rem 0 3rem">
               <Box
                 component="img"
                 alt="profile"
